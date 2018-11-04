@@ -12,7 +12,7 @@
 *************/
 
 .navbar{
-  background:#F97300;
+  background:#425577;
 }
 
 .nav-link , .navbar-brand{
@@ -50,9 +50,9 @@
 *************/
 
 .footer-basic {
-  padding:40px 0;
-  background-color:#ffffff;
-  color:#4b4c4d;
+  padding:15px 0;
+  background-color:#282d32;
+  color:#f0f9ff;
 }
 
 .footer-basic ul {
@@ -60,7 +60,7 @@
   list-style:none;
   text-align:center;
   font-size:18px;
-  line-height:1.6;
+  line-height:1.2;
   margin-bottom:0;
 }
 
@@ -80,14 +80,14 @@
 
 .footer-basic .social {
   text-align:center;
-  padding-bottom:25px;
+  padding-bottom:5px;
 }
 
 .footer-basic .social > a {
-  font-size:24px;
-  width:40px;
-  height:40px;
-  line-height:40px;
+  font-size:17px;
+  width:30px;
+  height:30px;
+  line-height:30px;
   display:inline-block;
   text-align:center;
   border-radius:50%;
@@ -102,7 +102,7 @@
 }
 
 .footer-basic .copyright {
-  margin-top:15px;
+  margin-top:10px;
   text-align:center;
   font-size:13px;
   color:#aaa;
