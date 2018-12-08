@@ -6,7 +6,10 @@ def index(request):
     return render(request, 'UI/index.html', {})
 
 def projects_index(request):
-    return None
+    return render(request, 'UI/index.html', {})
 
 def about_index(request):
-    return None
+    return render(request, 'UI/index.html', {})
+
+def contact_index(request):
+    return render(request, 'UI/index.html', {})
