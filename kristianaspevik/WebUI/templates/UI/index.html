@@ -1,107 +1,48 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Kristian Aspevik</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href='{% static "main.css" %}'>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </head>
-  <body class="page">
-    <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Kristian Aspevik Logo</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'about' %}">Home
-                  <span class="sr-only">(current)</span>
-                </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'about' %}">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'projects' %}">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <header>
+{% extends 'UI/base/base.html' %}
+
+{% block content %}
+<header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-        <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/LAaSoL0LrYs/1920x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="display-4">First Slide</h2>
-            <p class="lead">This is a description for the first slide.</p>
-          </div>
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/LAaSoL0LrYs/1920x1080')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h2 class="display-4">First Slide</h2>
+                    <p class="lead">This is a description for the first slide.</p>
+                </div>
+            </div>
+            <!-- Slide Two - Set the background image for this slide in the line below -->
+            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/bF2vsubyHcQ/1920x1080')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h2 class="display-4">Second Slide</h2>
+                    <p class="lead">This is a description for the second slide.</p>
+                </div>
+            </div>
+            <!-- Slide Three - Set the background image for this slide in the line below -->
+            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/szFUQoyvrxM/1920x1080')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h2 class="display-4">Third Slide</h2>
+                    <p class="lead">This is a description for the third slide.</p>
+                </div>
+            </div>
         </div>
-        <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('https://source.unsplash.com/bF2vsubyHcQ/1920x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="display-4">Second Slide</h2>
-            <p class="lead">This is a description for the second slide.</p>
-          </div>
-        </div>
-        <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('https://source.unsplash.com/szFUQoyvrxM/1920x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="display-4">Third Slide</h2>
-            <p class="lead">This is a description for the third slide.</p>
-          </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
-          </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
-          </a>
+        </a>
     </div>
-  </header>
+</header>
 
-    <!-- Page Content -->
-    <main class="main">
-    </main>
-    <div class="footer-basic">
-      <footer>
-        <div class="social">
-          <a href="#">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="#">
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a href="#">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#">
-            <i class="fab fa-instagram"></i>
-          </a>
-        </div>
-        <p class="copyright">Kristian André Aspevik © 2018</p>
-      </footer>
-    </div>
-  </body>
-</html>
+<!-- Page Content -->
+<main class="main">
+</main>
+{% endblock %}
