@@ -1,0 +1,60 @@
+{% extends 'UI/base/base.html' %}
+
+{% block content %}
+<!-- Page Content -->
+<main class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <p>Connect with me</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="connect-icons">
+                <a href="https://github.com/KristianAsp" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <p>OR</p>
+        </div>
+        <div class="d-xl-flex p-2 justify-content-center">
+            <div class="col-md-10">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" id="inputEmail4" placeholder="Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="email" class="form-control" id="inputPassword4" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text" rows="4" class="form-control" id="inputAddress" placeholder="Your Message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Send me a copy of the message.
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

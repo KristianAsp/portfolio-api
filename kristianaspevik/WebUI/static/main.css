@@ -4,14 +4,19 @@
   flex-direction: column;
 }
 
+body {
+  padding-top: 8vh;
+}
+
 .main {
   flex: 1;
 }
+
 /*************
 *** NAVBAR ***
 *************/
 .carousel-item {
-  height: 100vh;
+  height: 92vh;
   min-height: 350px;
   background: no-repeat center center scroll;
   -webkit-background-size: cover;
@@ -53,12 +58,12 @@
   opacity:1;
 }
 
-.footer-basic .social {
+.footer-basic .social, .connect-icons{
   text-align:center;
   padding-bottom:5px;
 }
 
-.footer-basic .social > a {
+.footer-basic .social > a, .connect-icons > a {
   font-size:17px;
   width:30px;
   height:30px;
@@ -72,8 +77,12 @@
   opacity:0.75;
 }
 
-.footer-basic .social > a:hover {
+.footer-basic .social > a:hover, .connect-icons > a:hover {
   opacity:0.9;
+}
+
+.connect-icons {
+    display: inline-block;
 }
 
 .footer-basic .copyright {

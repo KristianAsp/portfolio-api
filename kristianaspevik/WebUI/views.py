@@ -12,4 +12,4 @@ def about_index(request):
     return render(request, 'UI/index.html', {})
 
 def contact_index(request):
-    return render(request, 'UI/index.html', {})
+    return render(request, 'UI/contact/index.html', {})
