@@ -1,0 +1,27 @@
+{% extends 'UI/base/base.html' %}
+
+{% block content %}
+<!-- Page Content -->
+<main class="main">
+    <div class="container">
+        <div class="d-flex p-2">
+            <div class="row">
+                {% for k,v in projects.items %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://source.unsplash.com/LAaSoL0LrYs/1920x1080" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="row" style="margin:0">
+                                <h5 class="card-title"><a href="#">Project {{ v }}</a></h5>
+                            </div>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="{% url 'project_detail' project_name='hello' %}" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
