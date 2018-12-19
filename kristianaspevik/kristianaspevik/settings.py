@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'WebUI'
+    'WebUI',
+    'administrator'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kristianaspevik.wsgi.application'
 
+AUTH_USER_MODEL = 'administrator.CustomUser'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
