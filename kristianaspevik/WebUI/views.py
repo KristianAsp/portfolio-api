@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from .models import Project, Tag
+from .models import Project, Tag, ProjectType
 from django.shortcuts import render
 
 def index(request):
@@ -9,7 +9,8 @@ def projects_index(request):
 
     context = {
         'projects': Project.objects.all(),
-        'tags': Tag.objects.all()
+        'tags': Tag.objects.all(),
+        'projecttypes': ProjectType.objects.all()
     }
     return render(request, 'UI/projects/index.html', context)
 

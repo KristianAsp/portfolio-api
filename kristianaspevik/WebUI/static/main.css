@@ -138,6 +138,10 @@ span.multiselect-native-select select{
   width:93%
 }
 
+.multiselect-container{
+  width: max-content;
+}
+
 .multiselect-container>li{
   padding:0
 }
@@ -159,7 +163,7 @@ span.multiselect-native-select select{
 }
 
 .multiselect-container>li>a>label{
-  margin:0;height:100%;cursor:pointer;font-weight:400;padding:3px 20px 3px 40px
+  margin:0;height:100%;cursor:pointer;font-weight:400;padding:3px 20px 3px 20px
 }
 
 .multiselect-container>li>a>label.checkbox,.multiselect-container>li>a>label.radio{
@@ -181,4 +185,16 @@ span.multiselect-native-select select{
 .form-inline .multiselect-container li a label.checkbox input[type=checkbox],
 .form-inline .multiselect-container li a label.radio input[type=radio]{
   margin-left:-20px;margin-right:0
+}
+
+.dropdown-menu {
+  min-width: unset !important;
+}
+
+.row > div[class*='col-'] {
+  display: flex;
+}
+
+.card {
+  margin-bottom: 2rem;
 }
