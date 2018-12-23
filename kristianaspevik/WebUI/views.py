@@ -22,5 +22,5 @@ def contact_index(request):
 
 def project_detail(request, project_name):
 
-    project = Project.objects.get(title=project_name)
+    project = Project.objects.get(link=project_name)
     return render(request, 'UI/projects/detail.html', {'project': project})

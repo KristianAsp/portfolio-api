@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-
 class ProjectType(models.Model):
     PROJECT_TYPE_CHOICES = [
         ("Personal", "Personal"),
@@ -19,7 +18,21 @@ class Tag(models.Model):
 
 
 class Project(models.Model):
+
     title = models.CharField(max_length=50)
     description = models.TextField()
     tags = models.ManyToManyField(Tag)
     type = models.ForeignKey(to=ProjectType, on_delete=models.CASCADE)
+    link = models.CharField(max_length=100, null=True, unique=True)
+
+    def save(self):
+        if not self.link:
+            self.link = self.title.replace(" ", "_")
+        super(Project, self).save()
+
+
+
+
+
+
+

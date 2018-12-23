@@ -191,10 +191,14 @@ span.multiselect-native-select select{
   min-width: unset !important;
 }
 
-.row > div[class*='col-'] {
-  display: flex;
-}
-
 .card {
   margin-bottom: 2rem;
+}
+
+.card-title {
+  margin-bottom: -0.25rem !important;
+}
+
+.hide-card {
+  display: none !important;
 }

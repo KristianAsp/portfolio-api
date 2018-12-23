@@ -6,5 +6,5 @@ urlpatterns = [
     path(r'about', views.about_index, name="about"),
     path(r'contact', views.contact_index, name="contact"),
     path(r'projects', views.projects_index, name="projects"),
-    re_path(r'^projects/(?P<project_name>[A-Za-z0-9_]+)', views.project_detail, name="project_detail"),
+    re_path(r'^projects/(?P<project_name>[A-Za-z0-9_-]+)', views.project_detail, name="project_detail"),
 ]

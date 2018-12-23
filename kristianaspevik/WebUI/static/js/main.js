@@ -32,10 +32,12 @@ function applyFilters(){
 function showAndHideResult(resultSet){
     var fullSet = $('.projectCards .card'); //Obtain all projects.
     fullSet.each(function(){
-        $(this).hide()
+        $(this).parent().hide();
+        $(this).parent().addClass('hide-card');
     })
 
     resultSet.each(function(){
-        $(this).show()
+        $(this).parent().show()
+        $(this).parent().removeClass('hide-card');
     })
 }
