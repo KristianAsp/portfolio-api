@@ -31,6 +31,6 @@ RUN pip3 install gunicorn
 
 # Copy and set entrypoint
 WORKDIR $CONTAINER_PROJECT
-COPY ./dockerfiles/django/entrypoint.sh $CONTAINER_PROJECT/
+COPY ./entrypoint.sh $CONTAINER_PROJECT/
 RUN chmod +x $CONTAINER_PROJECT/entrypoint.sh
 ENTRYPOINT ["bash", "entrypoint.sh"]
