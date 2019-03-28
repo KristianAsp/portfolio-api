@@ -25,14 +25,7 @@ class Project(models.Model):
     type = models.ForeignKey(to=ProjectType, on_delete=models.CASCADE)
     link = models.CharField(max_length=100, null=True, unique=True)
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.link:
             self.link = self.title.replace(" ", "_")
         super(Project, self).save()
-
-
-
-
-
-
-
