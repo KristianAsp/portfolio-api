@@ -62,7 +62,7 @@
                         <img class="card-img-top" src="https://source.unsplash.com/LAaSoL0LrYs/1920x1080" alt="Card image cap">
                         <div class="card-body d-flex flex-column">
                             <div class="row" style="margin:0">
-                                <h5 class="card-title"><a href="{% url 'project_detail' project.title %}">{{ project.title }}</a></h5>
+                                <h5 class="card-title"><a href="{% url 'project_detail' project.link %}">{{ project.title }}</a></h5>
                             </div>
                             <div style="margin-top:unset">
                                 <a data-filter="{{project.type.title}}" href="#" style="font-size:12px; display:inline;">{{project.type.title}}</a>

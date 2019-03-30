@@ -11,14 +11,11 @@ class ProjectType(models.Model):
     ]
     title = models.CharField(max_length=30, choices=PROJECT_TYPE_CHOICES)
 
-
 # Tags used to classify projects, i.e. "Open Source", "University"
 class Tag(models.Model):
     name = models.CharField(max_length=20)
 
-
 class Project(models.Model):
-
     title = models.CharField(max_length=50)
     description = models.TextField()
     tags = models.ManyToManyField(Tag)
