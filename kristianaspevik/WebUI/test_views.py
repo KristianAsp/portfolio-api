@@ -21,7 +21,7 @@ class ProjectViewsTestCase(TestCase):
 
     def test_about_index_template(self):
         response = self.client.get('/about')
-        self.assertTemplateUsed(response, 'UI/index.html')
+        self.assertTemplateUsed(response, 'ui/index.html')
 
     def test_contact_index_response_code(self):
         """ Test About Index """
@@ -30,7 +30,7 @@ class ProjectViewsTestCase(TestCase):
 
     def test_contact_index_template(self):
         response = self.client.get('/contact')
-        self.assertTemplateUsed(response, 'UI/contact/index.html')
+        self.assertTemplateUsed(response, 'ui/contact/index.html')
 
     def test_projects_index_response_code(self):
         """ Test About Index """
@@ -39,7 +39,7 @@ class ProjectViewsTestCase(TestCase):
 
     def test_projects_index_template(self):
         response = self.client.get('/projects')
-        self.assertTemplateUsed(response, 'UI/projects/index.html')
+        self.assertTemplateUsed(response, 'ui/projects/index.html')
 
     def test_project_detail_index_response_code(self):
         response = self.client.get('/projects')
@@ -47,4 +47,4 @@ class ProjectViewsTestCase(TestCase):
 
     def test_project_detail_index_template(self):
         response = self.client.get('/projects/my_test_project')
-        self.assertTemplateUsed(response, 'UI/projects/detail.html')
+        self.assertTemplateUsed(response, 'ui/projects/detail.html')

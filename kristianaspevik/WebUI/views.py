@@ -3,7 +3,7 @@ from .models import Project, Tag, ProjectType
 from django.shortcuts import render
 
 def index(request):
-    return render(request, 'UI/index.html', {})
+    return render(request, 'ui/index.html', {})
 
 def projects_index(request):
 
@@ -12,15 +12,15 @@ def projects_index(request):
         'tags': Tag.objects.all(),
         'projecttypes': ProjectType.objects.all()
     }
-    return render(request, 'UI/projects/index.html', context)
+    return render(request, 'ui/projects/index.html', context)
 
 def about_index(request):
-    return render(request, 'UI/index.html', {})
+    return render(request, 'ui/index.html', {})
 
 def contact_index(request):
-    return render(request, 'UI/contact/index.html', {})
+    return render(request, 'ui/contact/index.html', {})
 
 def project_detail(request, project_name):
 
     project = Project.objects.get(link=project_name)
-    return render(request, 'UI/projects/detail.html', {'project': project})
+    return render(request, 'ui/projects/detail.html', {'project': project})
