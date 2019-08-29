@@ -6,6 +6,8 @@ touch /var/log/kristianaspevik/gunicorn-access.log
 
 export DJANGO_SETTINGS_MODULE=kristianaspevik.settings
 python3 manage.py collectstatic --noinput
+python3 manage.py makemigrations
+python3 manage.py migrate
 
 # Copy static files to shared volume
 cp -R static/* /opt/static/
