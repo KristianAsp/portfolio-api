@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'WebAPI',
-    'administrator'
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -53,26 +53,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'kristianaspevik.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['WebAPI/templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
 WSGI_APPLICATION = 'kristianaspevik.wsgi.application'
 
-AUTH_USER_MODEL = 'administrator.CustomUser'
-
+AUTH_USER_MODEL = 'WebAPI.CustomUser'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
