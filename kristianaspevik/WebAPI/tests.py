@@ -1,44 +1,99 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
+
+from django.urls import reverse
 from django.test import TestCase
 from .models import Project, Tag, ProjectType
+from rest_framework.test import APITestCase, APIClient
+from rest_framework.views import status
+from .serializers import ProjectSerializer
 
-class ProjectTestCase(TestCase):
+
+class BaseViewTest(APITestCase):
+    client = APIClient()
+
+    @staticmethod
+    def create_project(title="", description="", type=None):
+        if title != "" and description != "" and type is not None:
+            Project.objects.create(title=title,description=description,type=type).save()
+
     def setUp(self):
         ProjectType.objects.create(title="Personal")
         type = ProjectType.objects.get(title="Personal")
-        Project.objects.create(title="my test project", description="sample description", type=type).save()
-        Project.objects.create(title="my test-project", description="sample description", type=type).save()
+        self.create_project(title="my test project", description="sample description", type=type)
+        self.create_project(title="my test-project2", description="sample description", type=type)
         Tag.objects.create(name="University")
 
-    def test_set_project_link(self):
-        """ Test Generated Project Links """
-        project = Project.objects.get(title="my test project")
-        self.assertEqual(project.link, 'my_test_project')
-        project = Project.objects.get(title="my test-project")
-        self.assertEqual(project.link, 'my_test-project')
+        self.valid_data = {
+            "title": "test project",
+            "description": "test description",
+            "type": 1
+        }
 
-    def test_add_project_tag(self):
-        """ Test Adding Tag Post-Creation """
-        project = Project.objects.get(title="my test project")
+        self.invalid_data = {
+            "title": "test project",
+            "type": 1
+        }
 
-        project.tags.add(Tag.objects.get(name="University"))
 
-        self.assertEqual(project.tags.count(), 1)
+class GetProjectsTest(BaseViewTest):
+    def test_get_all_projects(self):
+        """
+        This test ensures that all projects added in the
+        setup method exists when we make a GET request to the
+        projects/ endpoint
+        """
 
-        project.tags.remove(Tag.objects.get(name="University"))
+        response = self.client.get(
+            reverse("projects", kwargs={"version": "v1"})
+        )
+        expected = Project.objects.all()
+        serialized = ProjectSerializer(expected, many=True)
+        self.assertEqual(response.data, serialized.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        self.assertEqual(project.tags.count(), 0)
 
-    def test_removing_project_tag(self):
-        """ Test Removing Tag Post-Creation """
-        project = Project.objects.get(title="my test project")
+    def test_get_single_project(self):
+        response = self.client.get(
+            reverse("project-detail", kwargs={"version": "v1", "pk":1})
+        )
 
-        project.tags.add(Tag.objects.get(name="University"))
+        expected = Project.objects.get(id=1)
+        serialized = ProjectSerializer(expected)
+        self.assertEqual(response.data, serialized.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        self.assertEqual(project.tags.count(), 1)
+class DeleteSongsTest(BaseViewTest):
+    def test_delete_single_project(self):
+        response = self.client.delete(
+            reverse("project-detail", kwargs={"version": "v1", "pk":1})
+        )
 
-        project.tags.remove(Tag.objects.get(name="University"))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-        self.assertEqual(project.tags.count(), 0)
+    def test_delete_non_existing_project(self):
+        response = self.client.delete(
+            reverse("project-detail", kwargs={"version": "v1", "pk": 100})
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+
+class UpdateSongsTest(BaseViewTest):
+    def test_update_single_project(self):
+        response = self.client.put(
+            reverse("project-detail", kwargs={"version": "v1", "pk":1}), data=json.dumps(self.valid_data), content_type='application/json'
+        )
+        expected = Project.objects.get(id=1)
+        serialized = ProjectSerializer(expected)
+        self.assertEqual(response.data, serialized.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_update_single_project_bad_data(self):
+        response = self.client.put(
+            reverse("project-detail", kwargs={"version": "v1", "pk": 1}), data=json.dumps(self.invalid_data), content_type='application/json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

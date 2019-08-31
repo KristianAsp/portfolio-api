@@ -1,26 +1,79 @@
 from __future__ import unicode_literals
-from .models import Project, Tag, ProjectType
-from django.shortcuts import render
+from .models import Project, ProjectType
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.views import status
+from .serializers import ProjectSerializer
+from .decorators import validate_project_request_data
 
-def index(request):
-    return render(request, 'ui/index.html', {})
+class ListCreateProjectsView(generics.ListCreateAPIView):
+    """
+    GET projects/
+    POST projects/
+    """
 
-def projects_index(request):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
 
-    context = {
-        'projects': Project.objects.all(),
-        'tags': Tag.objects.all(),
-        'projecttypes': ProjectType.objects.all()
-    }
-    return render(request, 'ui/projects/index.html', context)
+    def post(self, request, *args, **kwargs):
+        project = Project.objects.create(
+            title = request.data["title"],
+            description = request.data["description"]
+        )
 
-def about_index(request):
-    return render(request, 'ui/index.html', {})
+        return Response(
+            data=ProjectSerializer(project).data,
+            status=status.HTTP_201_CREATED
+        )
 
-def contact_index(request):
-    return render(request, 'ui/contact/index.html', {})
 
-def project_detail(request, project_name):
+class ProjectsDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    GET projects/:id/
+    PUT projects/:id/
+    DELETE projects/:id/
+    """
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
 
-    project = Project.objects.get(link=project_name)
-    return render(request, 'ui/projects/detail.html', {'project': project})
+    def get(self, request, *args, **kwargs):
+        try:
+            project = self.queryset.get(pk=kwargs["pk"])
+            return Response(ProjectSerializer(project).data)
+        except Project.DoesNotExist:
+            return Response(
+                data = {
+                    "message": "Project with id: {} does not exist".format(kwargs["pk"])
+                },
+                status = status.HTTP_404_NOT_FOUND
+            )
+
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            project = self.queryset.get(pk=kwargs["pk"])
+            project.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Project.DoesNotExist:
+            return Response(
+                data={
+                    "message": "Project with id: {} does not exist".format(kwargs["pk"])
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+    @validate_project_request_data
+    def put(self, request, *args, **kwargs):
+        try:
+            project = self.queryset.get(pk=kwargs["pk"])
+            serializer = ProjectSerializer()
+            request.data["type"] = ProjectType.objects.get(id = request.data["type"])
+            updated_project = serializer.update(project, request.data)
+            return Response(ProjectSerializer(updated_project).data)
+        except Project.DoesNotExist:
+            return Response(
+                data={
+                    "message": "Project with id: {} does not exist".format(kwargs["pk"])
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
