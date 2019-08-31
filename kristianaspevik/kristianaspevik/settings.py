@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'WebUI',
+    'WebAPI',
     'administrator'
 ]
 
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'kristianaspevik.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['WebUI/templates'],
+        'DIRS': ['WebAPI/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
