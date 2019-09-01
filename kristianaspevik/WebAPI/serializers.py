@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from rest_framework import serializers
-from .models import Project, ProjectType
+from .models import Project, ProjectType, Tag
 
 
 class ChoicesField(serializers.Field):
@@ -35,3 +35,9 @@ class ProjectTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectType
         fields = ("title", )
+
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ("name", )

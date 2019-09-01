@@ -23,9 +23,22 @@ def validate_project_type_request_data(fn):
         if not title:
             return Response(
                 data={
-                    "message": "A valid title is required to add a song"
+                    "message": "A valid title is required to add or update a project type"
                 },
                 status=status.HTTP_400_BAD_REQUEST
+            )
+        return fn(*args, **kwargs)
+    return decorated
+
+def validate_tag_request_data(fn):
+    def decorated(*args, **kwargs):
+        name = args[0].request.data.get("name", "")
+        if not name:
+            return Response(
+                data = {
+                    "message": "A valid name is required to add or update a tag"
+                },
+                status = status.HTTP_400_BAD_REQUEST
             )
         return fn(*args, **kwargs)
     return decorated
