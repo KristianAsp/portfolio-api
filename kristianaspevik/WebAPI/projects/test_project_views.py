@@ -4,11 +4,10 @@ from __future__ import unicode_literals
 import json
 
 from django.urls import reverse
-from django.test import TestCase
-from .models import Project, Tag, ProjectType
+from ..models import Project, Tag, ProjectType
 from rest_framework.test import APITestCase, APIClient
 from rest_framework.views import status
-from .serializers import ProjectSerializer
+from ..serializers import ProjectSerializer
 
 
 class BaseViewTest(APITestCase):
