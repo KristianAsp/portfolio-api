@@ -63,7 +63,6 @@ class CreateProjectTypesTest(BaseViewTest):
         response = self.client.post(
             reverse("project-types", kwargs={"version": "v1"}), data=json.dumps(self.valid_data), content_type="application/json"
         )
-
         self.assertEqual(response.data, self.valid_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 

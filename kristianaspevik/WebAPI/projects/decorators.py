@@ -10,7 +10,7 @@ def validate_project_request_data(fn):
         if not title or not description or not type:
             return Response(
                 data={
-                    "message": "A valid title, description and type are required to add a song"
+                    "message": "A valid title, description and type are required to add a project"
                 },
                 status=status.HTTP_400_BAD_REQUEST
             )

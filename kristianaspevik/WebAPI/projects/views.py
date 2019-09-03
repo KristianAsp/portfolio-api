@@ -16,15 +16,18 @@ class ListCreateProjectsView(generics.ListCreateAPIView):
     serializer_class = ProjectSerializer
 
     def post(self, request, *args, **kwargs):
-        project = Project.objects.create(
-            title = request.data["title"],
-            description = request.data["description"]
-        )
+        project = ProjectSerializer(data = request.data)
+        if project.is_valid():
+            project.save()
 
-        return Response(
-            data=ProjectSerializer(project).data,
-            status=status.HTTP_201_CREATED
-        )
+            return Response(
+                data=project.data,
+                status=status.HTTP_201_CREATED
+            )
+        else:
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 class ProjectsDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -66,10 +69,10 @@ class ProjectsDetailView(generics.RetrieveUpdateDestroyAPIView):
     def put(self, request, *args, **kwargs):
         try:
             project = self.queryset.get(pk=kwargs["pk"])
-            serializer = ProjectSerializer()
-            request.data["type"] = ProjectType.objects.get(id = request.data["type"])
-            updated_project = serializer.update(project, request.data)
-            return Response(ProjectSerializer(updated_project).data)
+            serializer = ProjectSerializer(project, request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
         except Project.DoesNotExist:
             return Response(
                 data={
@@ -90,18 +93,18 @@ class ListCreateProjectTypesView(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         try:
-            project_type = ProjectType.objects.create(
-                title=request.data["title"],
-            )
+            project_type = ProjectTypeSerializer(data = request.data)
+            if project_type.is_valid():
+                project_type.save()
 
-            return Response(
-                data=ProjectTypeSerializer(project_type).data,
-                status=status.HTTP_201_CREATED
-            )
+                return Response(
+                    data=project_type.data,
+                    status=status.HTTP_201_CREATED
+                )
+            else:
+                raise serializers.ValidationError
         except serializers.ValidationError:
-            return Response(
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProjectTypesDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -142,9 +145,12 @@ class ProjectTypesDetailView(generics.RetrieveUpdateDestroyAPIView):
     def put(self, request, *args, **kwargs):
         try:
             project_type = self.queryset.get(pk=kwargs["pk"])
-            serializer = ProjectTypeSerializer()
-            updated_project = serializer.update(project_type, request.data)
-            return Response(ProjectTypeSerializer(updated_project).data)
+            serializer = ProjectTypeSerializer(project_type, request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+
+            return Response(status = status.HTTP_400_BAD_REQUEST)
         except ProjectType.DoesNotExist:
             return Response(
                 data={
@@ -164,15 +170,18 @@ class ListCreateTagsView(generics.ListCreateAPIView):
     serializer_class = TagSerializer
 
     def post(self, request, *args, **kwargs):
-        tag = Tag.objects.create(
-            name = request.data["name"],
-        )
+        tag = TagSerializer(data = request.data)
+        if tag.is_valid():
+            tag.save()
 
-        return Response(
-            data=TagSerializer(tag).data,
-            status=status.HTTP_201_CREATED
-        )
-
+            return Response(
+                data=tag.data,
+                status=status.HTTP_201_CREATED
+            )
+        else:
+            return Response(
+                status = status.HTTP_400_BAD_REQUEST
+            )
 
 class TagDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
@@ -200,9 +209,14 @@ class TagDetailView(generics.RetrieveUpdateDestroyAPIView):
     def put(self, request, *args, **kwargs):
         try:
             tag = self.queryset.get(pk=kwargs["pk"])
-            serializer = TagSerializer()
-            updated_tag = serializer.update(tag, request.data)
-            return Response(TagSerializer(updated_tag).data)
+            serializer = TagSerializer(tag, request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(
+                    status = status.HTTP_400_BAD_REQUEST
+                )
         except Tag.DoesNotExist:
             return Response(
                 data={

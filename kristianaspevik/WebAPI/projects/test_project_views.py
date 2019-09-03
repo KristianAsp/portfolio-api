@@ -63,7 +63,8 @@ class GetProjectsTest(BaseViewTest):
         self.assertEqual(response.data, serialized.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-class DeleteSongsTest(BaseViewTest):
+
+class DeleteProjectsTest(BaseViewTest):
     def test_delete_single_project(self):
         response = self.client.delete(
             reverse("project-detail", kwargs={"version": "v1", "pk":1})
@@ -79,7 +80,7 @@ class DeleteSongsTest(BaseViewTest):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
-class UpdateSongsTest(BaseViewTest):
+class UpdateProjectsTest(BaseViewTest):
     def test_update_single_project(self):
         response = self.client.put(
             reverse("project-detail", kwargs={"version": "v1", "pk":1}), data=json.dumps(self.valid_data), content_type='application/json'
@@ -95,3 +96,14 @@ class UpdateSongsTest(BaseViewTest):
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class CreateProjectsTest(BaseViewTest):
+    def test_create_new_project(self):
+        response = self.client.post(
+            reverse("projects", kwargs={"version": "v1"}), data=json.dumps(self.valid_data),
+            content_type="application/json"
+        )
+
+        self.assertEqual(response.data, self.valid_data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)

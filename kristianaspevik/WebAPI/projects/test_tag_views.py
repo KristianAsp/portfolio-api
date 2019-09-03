@@ -66,3 +66,19 @@ class UpdateTagsTest(BaseViewTest):
         expected = TagSerializer(tag)
         self.assertEqual(response.data, expected.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class DeleteTagsTest(BaseViewTest):
+    def test_delete_existing_tag(self):
+        response = self.client.delete(
+            reverse("tag-detail", kwargs={"version": "v1", "pk": 1})
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_delete_non_existing_tag(self):
+        response = self.client.delete(
+            reverse("tag-detail", kwargs={"version": "v1", "pk": 99999})
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

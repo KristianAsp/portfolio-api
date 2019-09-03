@@ -24,7 +24,7 @@ class ChoicesField(serializers.Field):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    type = serializers.PrimaryKeyRelatedField(read_only=True)
+    type = serializers.PrimaryKeyRelatedField(queryset = ProjectType.objects.all())
     class Meta:
         model = Project
         fields = ("title", "description", "type")
