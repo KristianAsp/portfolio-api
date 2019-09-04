@@ -27,7 +27,8 @@ class BaseViewTest(APITestCase):
         self.valid_data = {
             "title": "test project",
             "description": "test description",
-            "type": 1
+            "type": 1,
+            "tags": []
         }
 
         self.invalid_data = {

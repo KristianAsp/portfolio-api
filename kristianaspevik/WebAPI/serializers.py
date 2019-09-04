@@ -3,7 +3,6 @@ from collections import OrderedDict
 from rest_framework import serializers
 from .models import Project, ProjectType, Tag
 
-
 class ChoicesField(serializers.Field):
     def __init__(self, choices, **kwargs):
         self._choices = OrderedDict(choices)
@@ -23,13 +22,6 @@ class ChoicesField(serializers.Field):
         raise serializers.ValidationError("Acceptable values are {0}.".format(list(self._choices.values())))
 
 
-class ProjectSerializer(serializers.ModelSerializer):
-    type = serializers.PrimaryKeyRelatedField(queryset = ProjectType.objects.all())
-    class Meta:
-        model = Project
-        fields = ("title", "description", "type")
-
-
 class ProjectTypeSerializer(serializers.ModelSerializer):
     title = ChoicesField(choices=ProjectType.PROJECT_TYPE_CHOICES)
     class Meta:
@@ -41,3 +33,27 @@ class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = ("name", )
+
+
+class ProjectSerializer(serializers.ModelSerializer):
+    type = serializers.PrimaryKeyRelatedField(queryset=ProjectType.objects.all())
+    tags = TagSerializer(many=True)
+
+    class Meta:
+        model = Project
+        fields = ("title", "description", "type", "tags")
+
+    def update(self, instance, validated_data):
+        for tag in validated_data["tags"]:
+            instance.tags.add(Tag.objects.get(tag))
+
+        instance.title = validated_data["title"]
+        instance.description = validated_data["description"]
+        instance.type = validated_data["type"]
+        instance.save()
+        return instance
+
+    def create(self, validated_data):
+        project = Project(title = validated_data['title'], description = validated_data['description'], type = validated_data['type'])
+        project.save()
+        return project

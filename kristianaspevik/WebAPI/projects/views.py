@@ -73,6 +73,8 @@ class ProjectsDetailView(generics.RetrieveUpdateDestroyAPIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
+            else:
+                return Response(status.HTTP_400_BAD_REQUEST)
         except Project.DoesNotExist:
             return Response(
                 data={
