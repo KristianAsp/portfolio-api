@@ -1,6 +1,5 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 urlpatterns = [
-    path(r'', include('WebAPI.urls')),
-    path(r'admin', include('administrator.urls')),
+    re_path('api/(?P<version>(v1|v2))/', include('WebAPI.urls'))
 ]
